@@ -1,0 +1,22 @@
+[build-system]
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "gotify"
+author = "d-k-bo"
+author-email = "dkbo@mail.de"
+home-page = "https://github.com/d-k-bo/python-gotify"
+requires = ["requests >= 2.25"]
+description-file = "README.md"
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Topic :: Home Automation",
+    "Topic :: Utilities",
+]
+requires-python = ">=3.9"
