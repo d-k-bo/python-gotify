@@ -1,6 +1,6 @@
 """Access your gotify server"""
 
-__version__ = "0.1"
+__version__ = "0.1.1"
 
 from io import IOBase
 from typing import Optional, Union
@@ -16,7 +16,11 @@ APP_TOKEN = ""
 CLIENT_TOKEN = ""
 
 
-def config(base_url: str, app_token: str, client_token: str):
+def config(
+    base_url: str = None,
+    app_token: str = None,
+    client_token: str = None,
+):
     """Set up the gotify module
 
     Args:
