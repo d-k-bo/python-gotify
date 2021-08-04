@@ -7,12 +7,12 @@ To send messages:
 ```python
 import gotify
 
-gotify.config(
+gotify_obj = gotify.gotify(
     base_url="https://gotify.example.com",
     app_token="AsWIJhvlHb.xgKe",
 )
 
-gotify.create_message(
+gotify_obj.create_message(
     "Hello you wonderful people!",
     title="Hello World",
     priority=0,
@@ -26,12 +26,12 @@ You can also manage things like applications:
 ```python
 import gotify
 
-gotify.config(
+gotify_obj = gotify.gotify(
     base_url="https://gotify.example.com",
     client_token="CoLwHBCAr8z2MMA",
 )
 
-app = gotify.create_application("foobar", description="test application")
+app = gotify_obj.create_application("foobar", description="test application")
 
 print("Created new application:", app)
 ```
