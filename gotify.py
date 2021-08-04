@@ -1,6 +1,6 @@
 """Access your gotify server."""
 
-__version__ = "0.2"
+__version__ = "0.2.0"
 
 from io import IOBase
 from typing import Optional, Union
@@ -368,3 +368,37 @@ class GotifyConfigurationError(Exception):
     """Config Error Class."""
 
     pass
+
+
+# --- Support legacy functions ------------------------------------------------
+_gotify_obj = gotify()
+
+config = _gotify_obj.config
+get_applications = _gotify_obj.get_applications
+create_application = _gotify_obj.create_application
+update_application = _gotify_obj.update_application
+delete_application = _gotify_obj.delete_application
+upload_application_image = _gotify_obj.upload_application_image
+get_messages = _gotify_obj.get_messages
+create_message = _gotify_obj.create_message
+delete_messages = _gotify_obj.delete_messages
+delete_message = _gotify_obj.delete_message
+get_clients = _gotify_obj.get_clients
+create_client = _gotify_obj.create_client
+update_client = _gotify_obj.update_client
+delete_client = _gotify_obj.delete_client
+get_current_user = _gotify_obj.get_current_user
+set_password = _gotify_obj.set_password
+get_users = _gotify_obj.get_users
+create_user = _gotify_obj.create_user
+get_user = _gotify_obj.get_user
+update_user = _gotify_obj.update_user
+delete_user = _gotify_obj.delete_user
+get_health = _gotify_obj.get_health
+get_plugins = _gotify_obj.get_plugins
+get_plugin_config = _gotify_obj.get_plugin_config
+update_plugin_config = _gotify_obj.update_plugin_config
+disable_plugin = _gotify_obj.disable_plugin
+get_plugin_display = _gotify_obj.get_plugin_display
+enable_plugin = _gotify_obj.enable_plugin
+get_version = _gotify_obj.get_version
