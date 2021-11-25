@@ -1,0 +1,62 @@
+* Install
+#+BEGIN_SRC sh
+pip install gotify --user
+#+END_SRC
+* Use
+** Add config
+#+NAME: config
+#+BEGIN_SRC python
+import gotify
+
+gotify.config(
+    base_url='http://127.0.0.1:',
+    # Token to receive messages
+    app_token='',
+    # Token to send messages
+    client_token=''
+)
+#+END_SRC
+** Send message
+#+NAME: send-message
+#+BEGIN_SRC python :noweb yes
+<<config>>
+
+gotify.create_message('Beep Boop, hello world')
+#+END_SRC
+** Get messages
+Defaults to 
+#+NAME: get-messages
+#+BEGIN_SRC python :results output :noweb yes
+<<config>>
+import json
+import gotify
+
+r = gotify.get_messages(11)
+t = json.dumps(r, indent=4)
+print(t)
+#+END_SRC
+** Create application
+#+NAME: create-application
+#+BEGIN_SRC python :noweb yes
+<<config>>
+
+app = gotify.create_application("foobar", description="test application")
+
+print(app)
+#+END_SRC
+
+The above code would produce an uglier version of this (obviously with a different id and token)
+#+BEGIN_SRC js
+{
+    'id': 15,
+    'token': 'A93-spxjFTnvSzX',
+    'name': 'foobar',
+    'description': 'test application',
+    'internal': False,
+    'image': 'static/defaultapp.png'
+}
+#+END_SRC
+* Warnings
+For most things you need to create a new client and set client_token accordingly.
+More details about the capabilities of gotify's API can be found in its [[https://gotify.net/api-docs][api documentation]].
+Since I don't use any gotify plugins, plugin-related functions are completely untested.
