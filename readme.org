@@ -4,12 +4,13 @@ pip install gotify --user
 #+END_SRC
 * Use
 ** Add config
+Config must be setup before you can do anything else
 #+NAME: config
 #+BEGIN_SRC python
 import gotify
 
 gotify.config(
-    base_url='http://127.0.0.1:',
+    base_url='http://127.0.0.1:<port>',
     # Token to receive messages
     app_token='',
     # Token to send messages
@@ -24,12 +25,12 @@ gotify.config(
 gotify.create_message('Beep Boop, hello world')
 #+END_SRC
 ** Get messages
-Defaults to 
+Defaults to print all messages
 #+NAME: get-messages
 #+BEGIN_SRC python :results output :noweb yes
 <<config>>
 
-r = gotify.get_messages(11)
+r = gotify.get_messages()
 t = json.dumps(r, indent=4)
 print(t)
 #+END_SRC
