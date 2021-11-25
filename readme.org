@@ -28,8 +28,6 @@ Defaults to
 #+NAME: get-messages
 #+BEGIN_SRC python :results output :noweb yes
 <<config>>
-import json
-import gotify
 
 r = gotify.get_messages(11)
 t = json.dumps(r, indent=4)
@@ -58,5 +56,7 @@ The above code would produce an uglier version of this (obviously with a differe
 #+END_SRC
 * Warnings
 For most things you need to create a new client and set client_token accordingly.
+
 More details about the capabilities of gotify's API can be found in its [[https://gotify.net/api-docs][api documentation]].
+
 Since I don't use any gotify plugins, plugin-related functions are completely untested.
