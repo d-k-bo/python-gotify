@@ -2,6 +2,16 @@
 
 This python module allows to manage and send messages to your [gotify server](https://github.com/gotify/server) without handling requests manually.
 
+## Installation
+
+python-gotify can be installed from [PyPi](https://pypi.org/project/gotify/) using pip:
+
+```
+pip install gotify
+```
+
+## Usage
+
 To send messages:
 
 ```python
@@ -45,6 +55,8 @@ aultapp.png'}
 ```
 
 **Note:** For most things you need to create a new client and set `client_token` accordingly.
+
+This module tries to implement every endpoint of the gotify API as an instance method of the `gotify` class. If you use only one gotify instance, you can use the module-level functions instead, which then use an internal `gotify` object.
 
 More details about the capabilities of gotify's API can be found in its [API documentation](https://gotify.net/api-docs).
 
