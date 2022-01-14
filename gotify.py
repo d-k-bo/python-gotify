@@ -1,6 +1,6 @@
 """Access your gotify server."""
 
-__version__ = "0.2.1"
+__version__ = "0.2.2"
 
 from io import IOBase
 from typing import Optional, Union
@@ -151,7 +151,7 @@ class gotify:
         if app_id is None:
             return self._request("/message", method="delete")
         else:
-            self._request("client", f"/application/{app_id}/message",
+            self._request(f"/application/{app_id}/message",
                           method="delete")
 
     def delete_message(self, msg_id: int):
