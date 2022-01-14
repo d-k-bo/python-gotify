@@ -102,10 +102,7 @@ class gotify:
 
     # --- Messages -----------------------------------------------------------
     def get_messages(
-        self,
-        app_id: int = None,
-        limit: int = None,
-        since: int = None
+        self, app_id: int = None, limit: int = None, since: int = None
     ):
         """Retreive messages."""
         data = {}
@@ -151,8 +148,7 @@ class gotify:
         if app_id is None:
             return self._request("/message", method="delete")
         else:
-            self._request(f"/application/{app_id}/message",
-                          method="delete")
+            self._request(f"/application/{app_id}/message", method="delete")
 
     def delete_message(self, msg_id: int):
         """Delete a specific message."""
@@ -200,7 +196,7 @@ class gotify:
         return self._request(f"/client/{id}", method="delete")
 
     # --- Users ---------------------------------------------------------------
-    def get_current_user(self,):
+    def get_current_user(self):
         """Get details of current user."""
         return self._request("/current/user")
 
