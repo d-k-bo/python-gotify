@@ -1,6 +1,6 @@
 """Access your gotify server."""
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 from io import IOBase
 from typing import Optional, Union
@@ -207,8 +207,7 @@ class gotify:
     def set_password(self, passwd: str):
         """Set password for current user."""
         return self._request(
-            "client",
-            "/current/user",
+            "/current/user/password",
             {"pass": passwd},
             method="post",
         )
