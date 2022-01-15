@@ -1,14 +1,15 @@
 """Access your gotify server."""
 
-__version__ = "0.2.2"
+__version__ = "0.3"
 
 from io import IOBase
 from typing import Optional, Union
 
 import requests
 
-
 # --- Main Class ----------------------------------------------------
+
+
 class gotify:
     """The gotify class."""
 
@@ -44,6 +45,7 @@ class gotify:
             self.client_token = client_token
 
     # --- Applications -------------------------------------------------------
+
     def get_applications(self):
         """Get list of applications."""
         return self._request("/application")
@@ -52,23 +54,11 @@ class gotify:
         self,
         name: str,
         description: str = None,
-        id: int = None,
-        image: str = None,
-        internal: bool = None,
-        token: str = None,
     ):
         """Create a new application."""
         data = {"name": name}
         if description is not None:
             data["description"] = description
-        if id is not None:
-            data["id"] = id
-        if image is not None:
-            data["image"] = image
-        if internal is not None:
-            data["internal"] = internal
-        if token is not None:
-            data["token"] = token
         return self._request("/application", data, method="post")
 
     def update_application(
@@ -76,20 +66,11 @@ class gotify:
         id: int,
         name: str,
         description: str = None,
-        image: str = None,
-        internal: bool = None,
-        token: str = None,
     ):
         """Update an application."""
         data = {"name": name}
         if description is not None:
             data["description"] = description
-        if image is not None:
-            data["image"] = image
-        if internal is not None:
-            data["internal"] = internal
-        if token is not None:
-            data["token"] = token
         return self._request(f"/application/{id}", data, method="put")
 
     def delete_application(self, id: int):
@@ -101,6 +82,7 @@ class gotify:
         return self._request(f"/application/{id}/image", image, method="post")
 
     # --- Messages -----------------------------------------------------------
+
     def get_messages(
         self, app_id: int = None, limit: int = None, since: int = None
     ):
@@ -119,23 +101,14 @@ class gotify:
     def create_message(
         self,
         message: str,
-        appid: Optional[int] = None,
-        date: Optional[str] = None,
         extras: Optional[dict] = None,
-        id: Optional[int] = None,
         priority: Optional[int] = None,
-        title: Optional[int] = None,
+        title: Optional[str] = None,
     ):
         """Send a message."""
         data = {"message": message}
-        if appid is not None:
-            data["appid"] = appid
-        if date is not None:
-            data["date"] = date
         if extras is not None:
             data["extras"] = extras
-        if id is not None:
-            data["id"] = id
         if priority is not None:
             data["priority"] = priority
         if title is not None:
@@ -148,54 +121,34 @@ class gotify:
         if app_id is None:
             return self._request("/message", method="delete")
         else:
-            self._request(f"/application/{app_id}/message", method="delete")
+            return self._request(
+                f"/application/{app_id}/message", method="delete"
+            )
 
     def delete_message(self, msg_id: int):
         """Delete a specific message."""
         return self._request(f"/message/{msg_id}", method="delete")
 
     # --- Clients -------------------------------------------------------------
+
     def get_clients(self):
         """Get list of clients."""
         return self._request("/client")
 
-    def create_client(
-        self,
-        name: str,
-        description: str = None,
-        id: int = None,
-        token: str = None,
-    ):
+    def create_client(self, name: str):
         """Create a new client."""
-        data = {"name": name}
-        if description is not None:
-            data["description"] = description
-        if id is not None:
-            data["id"] = id
-        if token is not None:
-            data["token"] = token
-        return self._request("/client", data, method="post")
+        return self._request("/client", {"name": name}, method="post")
 
-    def update_client(
-        self,
-        id: int,
-        name: str,
-        description: str = None,
-        token: str = None,
-    ):
+    def update_client(self, id: int, name: str):
         """Update a client."""
-        data = {"name": name}
-        if description is not None:
-            data["description"] = description
-        if token is not None:
-            data["token"] = token
-        return self._request(f"/client/{id}", data, method="put")
+        return self._request(f"/client/{id}", {"name": name}, method="put")
 
     def delete_client(self, id: int):
         """Delete a client."""
         return self._request(f"/client/{id}", method="delete")
 
     # --- Users ---------------------------------------------------------------
+
     def get_current_user(self):
         """Get details of current user."""
         return self._request("/current/user")
@@ -245,11 +198,13 @@ class gotify:
         return self._request(f"/user/{id}", method="delete")
 
     # --- Health --------------------------------------------------------------
+
     def get_health(self):
         """Get server status."""
         return self._request("/health")
 
     # --- Plugins -------------------------------------------------------------
+
     def get_plugins(self):
         """Get list of plugins."""
         return self._request("/plugin")
@@ -275,11 +230,13 @@ class gotify:
         return self._request(f"/plugin/{id}/enable", method="post")
 
     # --- Version -------------------------------------------------------------
+
     def get_version(self):
         """Get server version."""
         return self._request("/version")
 
     # --- Utils ---------------------------------------------------------------
+
     def _request(
         self,
         url: str,
@@ -338,6 +295,8 @@ class gotify:
 
 
 # --- Exceptions ----------------------------------------------------------
+
+
 class GotifyError(Exception):
     """Error class."""
 
@@ -366,6 +325,7 @@ class GotifyConfigurationError(Exception):
 
 
 # --- Support legacy functions ------------------------------------------------
+
 _gotify_obj = gotify()
 
 config = _gotify_obj.config
