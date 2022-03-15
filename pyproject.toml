@@ -1,11 +1,11 @@
 [build-system]
-requires = ["flit_core >=3.2,<4"]
+requires = ["flit_core >=3.4,<4"]
 build-backend = "flit_core.buildapi"
 
 [project]
 name = "gotify"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 license = { file = "LICENSE" }
 authors = [{ name = "d-k-bo", email = "dkbo@mail.de" }]
 classifiers = [
@@ -14,8 +14,8 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
     "Topic :: Home Automation",
     "Topic :: Utilities",
 ]
@@ -24,3 +24,48 @@ dynamic = ["version", "description"]
 
     [project.urls]
     Source = "https://github.com/d-k-bo/python-gotify"
+
+[tool]
+
+    [tool.black]
+    line-length = 79
+
+    [tool.isort]
+    profile = "black"
+    line_length = 79
+
+    [tool.mypy]
+    show_error_codes = true
+    warn_unused_ignores = true
+    exclude = ["venv/", ".nox/"]
+
+    [tool.flakeheaven]
+    format = "colored"
+    max_line_length = 79
+    exclude = ["venv/", ".nox/"]
+    show_source = true
+    docstring-convention = "google"
+
+        [tool.flakeheaven.plugins]
+        pycodestyle = ["+*"]
+        mccabe = ["+*"]
+        pylint = ["+*"]
+        pyflakes = ["+*"]
+        dlint = ["+*"]
+        "flake8-*" = ["+*"]
+        flake8-annotations = ["+*", "-ANN10?"]
+
+        [tool.flakeheaven.exceptions."*.md"]
+        flake8-docstrings = ["-*"]
+
+        [tool.flakeheaven.exceptions."noxfile.py"]
+        flake8-annotations = ["-*"]
+        flake8-docstrings = ["-*"]
+        pycodestyle = ["+*", "-E501"]
+
+        [tool.flakeheaven.exceptions."tests"]
+        flake8-annotations = ["-*"]
+        flake8-docstrings = ["-*"]
+
+        [tool.flakeheaven.exceptions."gotify/response_types.py"]
+        flake8-docstrings = ["-D101"]
