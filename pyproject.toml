@@ -39,6 +39,20 @@ dynamic = ["version", "description"]
     warn_unused_ignores = true
     exclude = ["venv/", ".nox/"]
 
+    [tool.pytest]
+
+        [tool.pytest.ini_options]
+        addopts = "--tb=short"
+        testpaths = "tests"
+
+    [tool.coverage]
+
+        [tool.coverage.run]
+        source = ["gotify"]
+
+        [tool.coverage.report]
+        show_missing = true
+
     [tool.flakeheaven]
     format = "colored"
     max_line_length = 79
@@ -53,7 +67,7 @@ dynamic = ["version", "description"]
         pyflakes = ["+*"]
         dlint = ["+*"]
         "flake8-*" = ["+*"]
-        flake8-annotations = ["+*", "-ANN10?"]
+        flake8-annotations = ["+*", "-ANN1??", "-ANN40?"]
 
         [tool.flakeheaven.exceptions."*.md"]
         flake8-docstrings = ["-*"]

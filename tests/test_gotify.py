@@ -26,6 +26,7 @@ APP_TOKEN = "AGo8b9paHo5wPkI"
 CLIENT_TOKEN = "C4er8DTiNk08mtt"
 
 
+@pytest.mark.usefixtures("run_test_server")
 class TestGotify:
     data: dict[str, Any] = {}
 
