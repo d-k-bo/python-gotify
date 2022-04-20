@@ -22,7 +22,7 @@ gotify = Gotify(
     app_token="AsWIJhvlHb.xgKe",
 )
 
-gotify = Gotify(
+gotify.create_message(
     "Hello you wonderful people!",
     title="Hello World",
     priority=0,
