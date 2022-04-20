@@ -1,11 +1,20 @@
 import nox
 
+nox.options.sessions = ["format", "lint", "mypy", "test"]
+
 
 @nox.session
 def format(session: nox.Session):
     session.install("black", "isort")
     session.run("isort", ".")
     session.run("black", ".")
+
+
+@nox.session
+def check_format(session: nox.Session):
+    session.install("black", "isort")
+    session.run("isort", ".", "--check")
+    session.run("black", ".", "--check")
 
 
 @nox.session
@@ -20,8 +29,8 @@ def lint(session: nox.Session):
 
 @nox.session
 def mypy(session: nox.Session) -> None:
-    session.install(".", "mypy", "types-requests", "nox", "pytest")
-    session.run("mypy", ".")
+    session.install(".", "mypy", "types-requests", "pytest")
+    session.run("mypy")
 
 
 @nox.session(python=["3.9", "3.10"])

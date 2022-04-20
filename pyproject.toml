@@ -37,7 +37,7 @@ dynamic = ["version", "description"]
     [tool.mypy]
     show_error_codes = true
     warn_unused_ignores = true
-    exclude = ["venv/", ".nox/"]
+    files = ["gotify/", "tests/"]
 
     [tool.pytest]
 

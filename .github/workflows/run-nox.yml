@@ -1,0 +1,16 @@
+name: Check format, lint, type-check, run tests
+on: [push, pull_request]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: excitedleigh/setup-nox@v2.0.0
+      - name: Check format
+        run: nox -s check_format
+      - name: Lint
+        run: nox -s lint
+      - name: Type-check
+        run: nox -s mypy
+      - name: Run tests
+        run: nox -s test
