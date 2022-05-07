@@ -9,9 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Added
+
+- Optional asynchronous gotify client `AsyncGotify` that works similar to the synchronous one
+- Both `Gotify` and `AsyncGotify` can be used as a (asynchronous) context manager to reuse the HTTP session
+
 ### Changed
 
 - Move test server setup from noxfile to a pytest fixture.
+- Use [`httpx`](https://www.python-httpx.org/) instead of `requests`
+
+### Removed
+
+- Removed transitional support for `gotify.gotify` and module-level functions. To use the (synchronous) interface it is now **required** to use the `Gotify` class
 
 ## [0.4]
 

@@ -5,8 +5,8 @@ from io import BytesIO
 from pathlib import Path
 from time import sleep
 
+import httpx
 import pytest
-import requests
 
 
 @pytest.fixture(scope="module")
@@ -44,16 +44,16 @@ def run_test_server():
     if not gotify_binary_path.exists():
         import zipfile
 
-        r = requests.get(
+        r = httpx.get(
             "https://github.com/gotify/server/releases/latest",
-            allow_redirects=True,
+            follow_redirects=True,
         )
-        tag_name = r.url.split("/")[-1]
+        tag_name = r.url.path.split("/")[-1]
 
-        r = requests.get(
+        r = httpx.get(
             "https://github.com/gotify/server/releases/download/"
             f"{tag_name}/{gotify_binary}.zip",
-            allow_redirects=True,
+            follow_redirects=True,
         )
         r.raise_for_status()
 
@@ -75,8 +75,8 @@ def run_test_server():
         # retry until server is reachable
         while True:
             try:
-                r = requests.get("http://localhost:30080")
-            except requests.ConnectionError:
+                r = httpx.get("http://localhost:30080")
+            except httpx.ConnectError:
                 sleep(0.1)
             else:
                 break

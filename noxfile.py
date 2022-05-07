@@ -29,16 +29,17 @@ def lint(session: nox.Session):
 
 @nox.session
 def mypy(session: nox.Session) -> None:
-    session.install(".", "mypy", "types-requests", "pytest")
+    session.install(".[stream]", "mypy", "pytest")
     session.run("mypy")
 
 
 @nox.session(python=["3.9", "3.10"])
 def test(session: nox.Session):
     session.install(
-        ".",
+        ".[stream]",
         "coverage",
         "pytest",
+        "pytest-asyncio",
         "trycast",
     )
     try:

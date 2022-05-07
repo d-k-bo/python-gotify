@@ -5,13 +5,10 @@ from typing import Any, List
 import pytest
 from trycast import trycast  # type: ignore[import]
 
-import gotify
-from gotify import (
+from gotify import Gotify, GotifyConfigurationError, GotifyError
+from gotify.response_types import (
     Application,
     Client,
-    Gotify,
-    GotifyConfigurationError,
-    GotifyError,
     Health,
     Message,
     PagedMessages,
@@ -50,16 +47,18 @@ class TestGotify:
 
     def test_bad_auth_mode(self):
         with pytest.raises(GotifyConfigurationError) as exc_info:
-            gf._request(url="/foobar", auth_mode="foobar")
+            gf._request(url_endpoint="/foobar", auth_mode="foobar")
         assert "authentification mode" in str(exc_info.value)
 
     def test_bad_request(self):
         with pytest.raises(GotifyError) as exc_info:
-            gf._request(url="/foobar")
+            gf._request(url_endpoint="/foobar")
         assert "Not Found" in str(exc_info.value)
 
         with pytest.raises(GotifyError) as exc_info:
-            gf._request(url="/application", data={"foo": "bar"}, method="post")
+            gf._request(
+                url_endpoint="/application", data={"foo": "bar"}, method="post"
+            )
         assert "Bad Request" in str(exc_info.value)
 
     def test_get_application(self):
@@ -230,17 +229,3 @@ class TestGotify:
     def test_get_version(self):
         r = gf.get_version()
         assert trycast(VersionInfo, r) is not None
-
-
-class TestGotifyLegacy:
-    def test_lowercase_gotify(self):
-        with pytest.deprecated_call():
-            assert gotify.gotify is Gotify
-
-    def test_module_level_function(self):
-        assert isinstance(gotify._gotify_obj, Gotify)
-        with pytest.deprecated_call():
-            assert gotify.get_health == gotify._gotify_obj.get_health
-
-    def test_dir(self):
-        assert set(gotify._deprecated_names).issubset(dir(gotify))

@@ -19,8 +19,11 @@ classifiers = [
     "Topic :: Home Automation",
     "Topic :: Utilities",
 ]
-dependencies = ["requests >= 2.25"]
+dependencies = ["httpx >= 0.22.0"]
 dynamic = ["version", "description"]
+
+    [project.optional-dependencies]
+    stream = ["websockets >= 10.3"]
 
     [project.urls]
     Source = "https://github.com/d-k-bo/python-gotify"
@@ -44,6 +47,7 @@ dynamic = ["version", "description"]
         [tool.pytest.ini_options]
         addopts = "--tb=short"
         testpaths = "tests"
+        asyncio_mode = "auto"
 
     [tool.coverage]
 
@@ -56,21 +60,19 @@ dynamic = ["version", "description"]
     [tool.flakeheaven]
     format = "colored"
     max_line_length = 79
-    exclude = ["venv/", ".nox/"]
+    exclude = ["venv/", ".nox/", "*.md"]
     show_source = true
     docstring-convention = "google"
 
         [tool.flakeheaven.plugins]
-        pycodestyle = ["+*"]
+        pycodestyle = ["+*", "-E203", "-W503"]
         mccabe = ["+*"]
         pylint = ["+*"]
         pyflakes = ["+*"]
         dlint = ["+*"]
         "flake8-*" = ["+*"]
         flake8-annotations = ["+*", "-ANN1??", "-ANN40?"]
-
-        [tool.flakeheaven.exceptions."*.md"]
-        flake8-docstrings = ["-*"]
+        flake8-docstrings = ["+*", "-D105"]
 
         [tool.flakeheaven.exceptions."noxfile.py"]
         flake8-annotations = ["-*"]
@@ -80,6 +82,9 @@ dynamic = ["version", "description"]
         [tool.flakeheaven.exceptions."tests"]
         flake8-annotations = ["-*"]
         flake8-docstrings = ["-*"]
+
+        [tool.flakeheaven.exceptions."gotify/__init__.py"]
+        pyflakes = ["+*", "-F401"]
 
         [tool.flakeheaven.exceptions."gotify/response_types.py"]
         flake8-docstrings = ["-D101"]
