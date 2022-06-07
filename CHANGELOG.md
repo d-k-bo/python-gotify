@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > :warning: Major version zero (0.y.z) is for initial development. Anything MAY change at any time. The public API SHOULD NOT be considered stable.
 
-## [unreleased]
+## [0.5.0] - 2022-06-07
 
 ### Added
 
@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Removed transitional support for `gotify.gotify` and module-level functions. To use the (synchronous) interface it is now **required** to use the `Gotify` class
 
-## [0.4]
+## [0.4] - 2022-03-15
 
 ### Added
 
@@ -91,7 +91,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial version
 
-[unreleased]: https://github.com/d-k-bo/python-gotify/compare/v0.4...HEAD
+[unreleased]: https://github.com/d-k-bo/python-gotify/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/d-k-bo/python-gotify/compare/v0.4...v0.5.0
 [0.4]: https://github.com/d-k-bo/python-gotify/compare/1c7ddb5393957169248cf917be8efe4397b309e3...v0.4
 [0.3]: https://github.com/d-k-bo/python-gotify/compare/dd5c4cbe8ca226e1c93482aff3dc74c88f345390...1c7ddb5393957169248cf917be8efe4397b309e3
 [0.2.2]: https://github.com/d-k-bo/python-gotify/compare/36d8a5a10ab6cb6ef4f577a13a5db2a4ac3f5825...dd5c4cbe8ca226e1c93482aff3dc74c88f345390
