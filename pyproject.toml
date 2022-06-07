@@ -4,6 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "gotify"
+version = "0.4.0"
 readme = "README.md"
 requires-python = ">=3.9"
 license = { file = "LICENSE" }
@@ -21,7 +22,7 @@ classifiers = [
     "Topic :: Utilities",
 ]
 dependencies = ["httpx >= 0.22.0"]
-dynamic = ["version", "description"]
+dynamic = ["description"]
 
     [project.optional-dependencies]
     stream = ["websockets >= 10.3"]
