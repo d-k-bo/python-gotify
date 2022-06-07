@@ -115,9 +115,7 @@ class AsyncGotify:
         """Delete an application."""
         return await self._request(f"/application/{id}", method="delete")
 
-    async def upload_application_image(
-        self, id: int, image: BinaryIO
-    ) -> Application:
+    async def upload_application_image(self, id: int, image: BinaryIO) -> Application:
         """Upload an image for an application."""
         return await self._request(
             f"/application/{id}/image", file=image, method="post"
@@ -183,15 +181,11 @@ class AsyncGotify:
 
     async def create_client(self, name: str) -> Client:
         """Create a client."""
-        return await self._request(
-            "/client", data={"name": name}, method="post"
-        )
+        return await self._request("/client", data={"name": name}, method="post")
 
     async def update_client(self, id: int, name: str) -> Client:
         """Update a client."""
-        return await self._request(
-            f"/client/{id}", data={"name": name}, method="put"
-        )
+        return await self._request(f"/client/{id}", data={"name": name}, method="put")
 
     async def delete_client(self, id: int) -> None:
         """Delete a client."""
@@ -384,6 +378,4 @@ class AsyncGotify:
                     "sending messages."
                 )
             return self.app_token
-        raise GotifyConfigurationError(
-            f"Unknown authentification mode '{auth_mode}'."
-        )
+        raise GotifyConfigurationError(f"Unknown authentification mode '{auth_mode}'.")

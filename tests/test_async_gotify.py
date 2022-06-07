@@ -72,9 +72,7 @@ class TestAsyncGotify:
         assert r1["name"] == "TestApplication"
         assert r1["description"] == ""
 
-        r2 = await agf.create_application(
-            "TestApplication2", "TestDescription"
-        )
+        r2 = await agf.create_application("TestApplication2", "TestDescription")
         assert trycast(Application, r2) is not None
         assert r2["name"] == "TestApplication2"
         assert r2["description"] == "TestDescription", r2
@@ -109,9 +107,7 @@ class TestAsyncGotify:
         assert trycast(Message, r1) is not None
         assert r1["message"] == "TestMessage1"
 
-        r2 = await agf.create_message(
-            "TestMessage2", priority=4, title="TestTitle"
-        )
+        r2 = await agf.create_message("TestMessage2", priority=4, title="TestTitle")
         assert trycast(Message, r2) is not None
         assert r2["message"] == "TestMessage2"
         assert r2.get("title") == "TestTitle"
@@ -152,9 +148,7 @@ class TestAsyncGotify:
         self.data["client-id"] = r["id"]
 
     async def test_update_client(self):
-        r = await agf.update_client(
-            self.data["client-id"], "UpdatedTestClient"
-        )
+        r = await agf.update_client(self.data["client-id"], "UpdatedTestClient")
         assert trycast(Client, r) is not None
         assert r["name"] == "UpdatedTestClient"
 

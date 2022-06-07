@@ -39,11 +39,9 @@ dynamic = ["description"]
 [tool]
 
     [tool.black]
-    line-length = 79
 
     [tool.isort]
     profile = "black"
-    line_length = 79
 
     [tool.mypy]
     show_error_codes = true
@@ -65,34 +63,19 @@ dynamic = ["description"]
         [tool.coverage.report]
         show_missing = true
 
-    [tool.flakeheaven]
-    format = "colored"
-    max_line_length = 79
-    exclude = ["venv/", ".nox/", "*.md"]
-    show_source = true
-    docstring-convention = "google"
-
-        [tool.flakeheaven.plugins]
-        pycodestyle = ["+*", "-E203", "-W503"]
-        mccabe = ["+*"]
-        pylint = ["+*"]
-        pyflakes = ["+*"]
-        dlint = ["+*"]
-        "flake8-*" = ["+*"]
-        flake8-annotations = ["+*", "-ANN1??", "-ANN40?"]
-        flake8-docstrings = ["+*", "-D105"]
-
-        [tool.flakeheaven.exceptions."noxfile.py"]
-        flake8-annotations = ["-*"]
-        flake8-docstrings = ["-*"]
-        pycodestyle = ["+*", "-E501"]
-
-        [tool.flakeheaven.exceptions."tests"]
-        flake8-annotations = ["-*"]
-        flake8-docstrings = ["-*"]
-
-        [tool.flakeheaven.exceptions."gotify/__init__.py"]
-        pyflakes = ["+*", "-F401"]
-
-        [tool.flakeheaven.exceptions."gotify/response_types.py"]
-        flake8-docstrings = ["-D101"]
+    [tool.flake8]
+    # pip install pyproject-flake8 flake8-annotations flake8-bugbear flake8-docstrings
+    max-line-length = 88
+    extend-ignore = [
+        "E203",  # whitespace before ‘,’, ‘;’, or ‘:’ (incompatible with PEP8 and black)
+        "E501",  # line too long (to strict, use B950 instead)
+        "ANN10",  # Missing type annotation for self/cls
+        "D105",  # D105 Missing docstring in magic method
+    ]
+    extend-select = ["B950"]  # line too long    
+    docstring-convention = "google"  # flake8-docstrings
+    per-file-ignores = [
+        "gotify/response_types.py: D101",  # Missing docstring in public class
+        "tests/*: D, ANN",
+        "noxfile.py: D, ANN",
+    ]

@@ -20,11 +20,12 @@ def check_format(session: nox.Session):
 @nox.session
 def lint(session: nox.Session):
     session.install(
-        "flakeheaven",
-        "flake8-docstrings",
+        "pyproject-flake8",
         "flake8-annotations",
+        "flake8-bugbear",
+        "flake8-docstrings",
     )
-    session.run("flakeheaven", "lint")
+    session.run("pflake8", "gotify/", "tests/", "noxfile.py")
 
 
 @nox.session

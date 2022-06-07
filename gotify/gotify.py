@@ -117,13 +117,9 @@ class Gotify:
         """Delete an application."""
         return self._request(f"/application/{id}", method="delete")
 
-    def upload_application_image(
-        self, id: int, image: BinaryIO
-    ) -> Application:
+    def upload_application_image(self, id: int, image: BinaryIO) -> Application:
         """Upload an image for an application."""
-        return self._request(
-            f"/application/{id}/image", file=image, method="post"
-        )
+        return self._request(f"/application/{id}/image", file=image, method="post")
 
     # --- Messages -----------------------------------------------------------
 
@@ -135,9 +131,7 @@ class Gotify:
     ) -> PagedMessages:
         """Return all messages, optionally from a specific application."""
         if app_id is None:
-            return self._request(
-                "/message", data={"limit": limit, "since": since}
-            )
+            return self._request("/message", data={"limit": limit, "since": since})
         else:
             return self._request(
                 f"/application/{app_id}/message",
@@ -169,9 +163,7 @@ class Gotify:
         if app_id is None:
             return self._request("/message", method="delete")
         else:
-            return self._request(
-                f"/application/{app_id}/message", method="delete"
-            )
+            return self._request(f"/application/{app_id}/message", method="delete")
 
     def delete_message(self, msg_id: int) -> None:
         """Delete a message with an id."""
@@ -189,9 +181,7 @@ class Gotify:
 
     def update_client(self, id: int, name: str) -> Client:
         """Update a client."""
-        return self._request(
-            f"/client/{id}", data={"name": name}, method="put"
-        )
+        return self._request(f"/client/{id}", data={"name": name}, method="put")
 
     def delete_client(self, id: int) -> None:
         """Delete a client."""
@@ -215,9 +205,7 @@ class Gotify:
         """Return all users."""
         return self._request("/user")
 
-    def create_user(
-        self, name: str, passwd: str, admin: bool | None = None
-    ) -> User:
+    def create_user(self, name: str, passwd: str, admin: bool | None = None) -> User:
         """Create a user."""
         return self._request(
             "/user",
@@ -351,6 +339,4 @@ class Gotify:
                     "sending messages."
                 )
             return self.app_token
-        raise GotifyConfigurationError(
-            f"Unknown authentification mode '{auth_mode}'."
-        )
+        raise GotifyConfigurationError(f"Unknown authentification mode '{auth_mode}'.")

@@ -56,9 +56,7 @@ class TestGotify:
         assert "Not Found" in str(exc_info.value)
 
         with pytest.raises(GotifyError) as exc_info:
-            gf._request(
-                url_endpoint="/application", data={"foo": "bar"}, method="post"
-            )
+            gf._request(url_endpoint="/application", data={"foo": "bar"}, method="post")
         assert "Bad Request" in str(exc_info.value)
 
     def test_get_application(self):
