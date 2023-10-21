@@ -282,7 +282,7 @@ class Gotify:
         file: BinaryIO | None = None,
         method: str = "get",
         auth_mode: str = "client",
-    ) -> Any:
+    ) -> Any:  # noqa: ANN401
         # if Gotify isn't used as a context manager
         if self.http_client is None:
             with self:
