@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Any, List
 
 import pytest
-from trycast import trycast  # type: ignore[import]
+from trycast import trycast  # type: ignore[import-not-found]
 
 from gotify import Gotify, GotifyConfigurationError, GotifyError
 from gotify.response_types import (
