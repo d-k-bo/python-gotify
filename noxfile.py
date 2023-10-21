@@ -34,7 +34,7 @@ def mypy(session: nox.Session) -> None:
     session.run("mypy")
 
 
-@nox.session(python=["3.9", "3.10", "3.11"])
+@nox.session(python=["3.9", "3.10", "3.11", "3.12"])
 def test(session: nox.Session):
     session.install("-e", ".[stream,test]")
     session.run(
