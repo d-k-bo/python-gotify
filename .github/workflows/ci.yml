@@ -28,14 +28,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        venv_version: ["3.9", "3.10", "3.11"]
+        venv_version: ["3.9", "3.10", "3.11", "3.12"]
     steps:
       - uses: actions/checkout@v3
       - uses: excitedleigh/setup-nox@v2.1.0
-      - if: matrix.venv_version == '3.11'
-        uses: actions/setup-python@v3.1.2
-        with:
-          python-version: "3.11-dev"
       - run: nox -s test-${{ matrix.venv_version }} --error-on-missing-interpreters
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
