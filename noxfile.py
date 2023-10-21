@@ -19,13 +19,8 @@ def check_format(session: nox.Session):
 
 @nox.session
 def lint(session: nox.Session):
-    session.install(
-        "pyproject-flake8",
-        "flake8-annotations",
-        "flake8-bugbear",
-        "flake8-docstrings",
-    )
-    session.run("pflake8", "gotify/", "tests/", "noxfile.py")
+    session.install("ruff")
+    session.run("ruff", "check", ".")
 
 
 @nox.session

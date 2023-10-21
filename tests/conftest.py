@@ -21,12 +21,12 @@ def run_test_server():
             "armv7l": "arm-7",
             "aarch64": "arm64",
         }[platform.machine()]
-    except KeyError:
+    except KeyError as err:
         raise Exception(
             f"Your architecture '{platform.machine()}' seems to be unsupported"
             "by gotify-server. If this assumption is incorrect, "
             "please create an issue on github."
-        )
+        ) from err
 
     if system == "windows":
         gotify_binary = f"gotify-windows-{arch}.exe"

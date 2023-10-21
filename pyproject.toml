@@ -64,19 +64,23 @@ dynamic = ["description"]
         [tool.coverage.report]
         show_missing = true
 
-    [tool.flake8]
-    # pip install pyproject-flake8 flake8-annotations flake8-bugbear flake8-docstrings
-    max-line-length = 88
-    extend-ignore = [
+    [tool.ruff]
+    # ceil(1.1 * 88) makes `E501` equivalent to `B950`
+    # https://github.com/astral-sh/ruff/issues/389#issuecomment-1528922079
+    line-length = 97
+
+    select = ["B", "D", "E", "F", "ANN"]
+    ignore = [
         "E203",  # whitespace before ‘,’, ‘;’, or ‘:’ (incompatible with PEP8 and black)
         "E501",  # line too long (to strict, use B950 instead)
-        "ANN10",  # Missing type annotation for self/cls
+        "ANN10", # Missing type annotation for self/cls
         "D105",  # D105 Missing docstring in magic method
     ]
-    extend-select = ["B950"]  # line too long    
-    docstring-convention = "google"  # flake8-docstrings
-    per-file-ignores = [
-        "gotify/response_types.py: D101",  # Missing docstring in public class
-        "tests/*: D, ANN",
-        "noxfile.py: D, ANN",
-    ]
+
+        [tool.ruff.per-file-ignores]
+        "gotify/response_types.py" = ["D101"]  # Missing docstring in public class
+        "tests/*" = ["D", "ANN"]
+        "noxfile.py" = ["D", "ANN"]
+
+        [tool.ruff.pydocstyle]
+        convention = "google"

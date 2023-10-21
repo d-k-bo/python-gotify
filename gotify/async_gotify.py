@@ -321,7 +321,7 @@ class AsyncGotify:
         file: BinaryIO | None = None,
         method: str = "get",
         auth_mode: str = "client",
-    ) -> Any:
+    ) -> Any:  # noqa: ANN401
         # if AsyncGotify isn't used as a context manager
         if self.http_client is None:
             async with self:
