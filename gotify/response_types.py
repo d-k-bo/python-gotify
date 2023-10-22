@@ -1,8 +1,8 @@
 """TypedDicts to describe JSON responses.
 
-Based on https://gotify.net/api-docs?urls.primaryName=v2.1.4.
+Based on https://gotify.net/api-docs?urls.primaryName=v2.4.0.
 """
-from typing import TypedDict
+from typing import Optional, TypedDict
 
 
 class Application(TypedDict, total=False):
@@ -12,12 +12,15 @@ class Application(TypedDict, total=False):
     internal: bool
     name: str
     token: str
+    defaultPriority: int
+    lastUsed: Optional[str]
 
 
 class Client(TypedDict, total=False):
     id: int
     name: str
     token: str
+    lastUsed: Optional[str]
 
 
 class Error(TypedDict, total=False):
