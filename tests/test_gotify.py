@@ -69,21 +69,30 @@ class TestGotify:
         assert r1["name"] == "TestApplication"
         assert r1["description"] == ""
 
-        r2 = gf.create_application("TestApplication2", "TestDescription")
+        r2 = gf.create_application(
+            "TestApplication2",
+            "TestDescription",
+            default_priority=4,
+        )
         check_type(r2, Application)
         assert r2["name"] == "TestApplication2"
         assert r2["description"] == "TestDescription", r2
+        assert r2["defaultPriority"] == 4
 
         self.data["app-id"] = r1["id"]
         self.data["default-image"] = r1["image"]
 
     def test_update_application(self):
         r = gf.update_application(
-            self.data["app-id"], "UpdatedTestApplication", "UpdatedDescription"
+            self.data["app-id"],
+            "UpdatedTestApplication",
+            "UpdatedDescription",
+            default_priority=6,
         )
         check_type(r, Application)
         assert r["name"] == "UpdatedTestApplication"
         assert r["description"] == "UpdatedDescription"
+        assert r["defaultPriority"] == 6
 
     def test_upload_application_image(self):
         with (Path(__file__).parent / "img.png").open("rb") as f:

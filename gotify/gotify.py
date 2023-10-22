@@ -92,11 +92,16 @@ class Gotify:
         self,
         name: str,
         description: str | None = None,
+        default_priority: int | None = None,
     ) -> Application:
         """Create an application."""
         return self._request(
             "/application",
-            data={"name": name, "description": description},
+            data={
+                "name": name,
+                "description": description,
+                "defaultPriority": default_priority,
+            },
             method="post",
         )
 
@@ -105,11 +110,16 @@ class Gotify:
         id: int,
         name: str,
         description: str | None = None,
+        default_priority: int | None = None,
     ) -> Application:
         """Update an application."""
         return self._request(
             f"/application/{id}",
-            data={"name": name, "description": description},
+            data={
+                "name": name,
+                "description": description,
+                "defaultPriority": default_priority,
+            },
             method="put",
         )
 
