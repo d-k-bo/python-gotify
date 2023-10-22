@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Any, List
 
 import pytest
-from trycast import trycast  # type: ignore[import-not-found]
+from typeguard import check_type
 
 from gotify import AsyncGotify, GotifyConfigurationError, GotifyError
 from gotify.response_types import (
@@ -64,16 +64,16 @@ class TestAsyncGotify:
 
     async def test_get_application(self):
         r = await agf.get_applications()
-        assert trycast(List[Application], r) is not None
+        check_type(r, List[Application])
 
     async def test_create_application(self):
         r1 = await agf.create_application("TestApplication")
-        assert trycast(Application, deepcopy(r1)) is not None
+        check_type(deepcopy(r1), Application)
         assert r1["name"] == "TestApplication"
         assert r1["description"] == ""
 
         r2 = await agf.create_application("TestApplication2", "TestDescription")
-        assert trycast(Application, r2) is not None
+        check_type(r2, Application)
         assert r2["name"] == "TestApplication2"
         assert r2["description"] == "TestDescription", r2
 
@@ -84,31 +84,31 @@ class TestAsyncGotify:
         r = await agf.update_application(
             self.data["app-id"], "UpdatedTestApplication", "UpdatedDescription"
         )
-        assert trycast(Application, r) is not None
+        check_type(r, Application)
         assert r["name"] == "UpdatedTestApplication"
         assert r["description"] == "UpdatedDescription"
 
     async def test_upload_application_image(self):
         with (Path(__file__).parent / "img.png").open("rb") as f:
             r = await agf.upload_application_image(self.data["app-id"], f)
-        assert trycast(Application, r) is not None
+        check_type(r, Application)
         assert r["image"] != self.data["default-image"]
 
     async def test_get_messages(self):
         r1 = await agf.get_messages(self.data["app-id"])
-        assert trycast(PagedMessages, r1) is not None
+        check_type(r1, PagedMessages)
 
         r2 = await agf.get_messages()
-        assert trycast(PagedMessages, r2) is not None, r2
+        check_type(r2, PagedMessages)
         assert all((msg in r2["messages"] for msg in r1["messages"]))
 
     async def test_create_message(self):
         r1 = await agf.create_message("TestMessage1")
-        assert trycast(Message, r1) is not None
+        check_type(r1, Message)
         assert r1["message"] == "TestMessage1"
 
         r2 = await agf.create_message("TestMessage2", priority=4, title="TestTitle")
-        assert trycast(Message, r2) is not None
+        check_type(r2, Message)
         assert r2["message"] == "TestMessage2"
         assert r2.get("title") == "TestTitle"
 
@@ -123,14 +123,14 @@ class TestAsyncGotify:
         assert r1 is None
 
         r2 = await agf.get_messages(self.data["app-id"])
-        assert trycast(PagedMessages, r2) is not None
+        check_type(r2, PagedMessages)
         assert len(r2["messages"]) == 0
 
         r3 = await agf.delete_messages()
         assert r3 is None
 
         r4 = await agf.get_messages()
-        assert trycast(PagedMessages, r4) is not None
+        check_type(r4, PagedMessages)
         assert len(r4["messages"]) == 0
 
     async def test_delete_application(self):
@@ -139,17 +139,17 @@ class TestAsyncGotify:
 
     async def test_get_clients(self):
         r = await agf.get_clients()
-        assert trycast(List[Client], r) is not None
+        check_type(r, List[Client])
 
     async def test_create_client(self):
         r = await agf.create_client("TestClient")
-        assert trycast(Client, r) is not None
+        check_type(r, Client)
         assert r["name"] == "TestClient"
         self.data["client-id"] = r["id"]
 
     async def test_update_client(self):
         r = await agf.update_client(self.data["client-id"], "UpdatedTestClient")
-        assert trycast(Client, r) is not None
+        check_type(r, Client)
         assert r["name"] == "UpdatedTestClient"
 
     async def test_delete_client(self):
@@ -158,7 +158,7 @@ class TestAsyncGotify:
 
     async def test_get_current_user(self):
         r = await agf.get_current_user()
-        assert trycast(User, r) is not None
+        check_type(r, User)
 
     async def test_set_password(self):
         r = await agf.set_password("admin")
@@ -166,15 +166,15 @@ class TestAsyncGotify:
 
     async def test_get_users(self):
         r = await agf.get_users()
-        assert trycast(List[User], r) is not None
+        check_type(r, List[User])
 
     async def test_create_user(self):
         r1 = await agf.create_user("TestUser1", "TestPassword")
-        assert trycast(User, r1) is not None
+        check_type(r1, User)
         assert r1["name"] == "TestUser1"
 
         r2 = await agf.create_user("TestUser2", "TestPassword", admin=True)
-        assert trycast(User, r2) is not None
+        check_type(r2, User)
         assert r2["name"] == "TestUser2"
         assert r2.get("admin") is True
 
@@ -182,12 +182,12 @@ class TestAsyncGotify:
 
     async def test_get_user(self):
         r1 = await agf.get_user(self.data["user-id"])
-        assert trycast(User, r1) is not None
+        check_type(r1, User)
         assert r1["name"] == "TestUser1"
 
     async def test_update_user(self):
         r1 = await agf.update_user(self.data["user-id"], "UpdatedTestUser1")
-        assert trycast(User, r1) is not None
+        check_type(r1, User)
         assert r1["name"] == "UpdatedTestUser1"
 
         r2 = await agf.update_user(
@@ -196,7 +196,7 @@ class TestAsyncGotify:
             passwd="UpdatedTestPasword",  # changes can't be tested
             admin=True,
         )
-        assert trycast(User, r2) is not None
+        check_type(r2, User)
         assert r2["name"] == "UpdatedUpdatedTestUser1"
         assert r2.get("admin") is True
 
@@ -206,7 +206,7 @@ class TestAsyncGotify:
 
     async def test_get_health(self):
         r = await agf.get_health()
-        assert trycast(Health, r) is not None
+        check_type(r, Health)
 
     # TODO
     # async def test_get_plugins(self):
@@ -229,7 +229,7 @@ class TestAsyncGotify:
 
     async def test_get_version(self):
         r = await agf.get_version()
-        assert trycast(VersionInfo, r) is not None
+        check_type(r, VersionInfo)
 
     async def test_stream(self):
         n = 5
