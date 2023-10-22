@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > :warning: Major version zero (0.y.z) is for initial development. Anything MAY change at any time. The public API SHOULD NOT be considered stable.
 
+## [Unreleased]
+
+## [0.6.0] - 2023-10-22
+
+### Added
+
+- Support for Python 3.12
+- Support for Gotify 2.4.0
+
 ## [0.5.0] - 2022-06-07
 
 ### Added
@@ -91,7 +100,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial version
 
-[unreleased]: https://github.com/d-k-bo/python-gotify/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/d-k-bo/python-gotify/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/d-k-bo/python-gotify/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/d-k-bo/python-gotify/compare/v0.4...v0.5.0
 [0.4]: https://github.com/d-k-bo/python-gotify/compare/1c7ddb5393957169248cf917be8efe4397b309e3...v0.4
 [0.3]: https://github.com/d-k-bo/python-gotify/compare/dd5c4cbe8ca226e1c93482aff3dc74c88f345390...1c7ddb5393957169248cf917be8efe4397b309e3
