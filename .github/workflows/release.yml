@@ -23,3 +23,12 @@ jobs:
         env:
           FLIT_USERNAME: __token__
           FLIT_PASSWORD: ${{ secrets.PYPI_KEY }}
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: taiki-e/create-gh-release-action@v1
+        with:
+          branch: main
+          changelog: CHANGELOG.md
+          token: ${{ secrets.GITHUB_TOKEN }}
