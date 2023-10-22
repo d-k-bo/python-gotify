@@ -25,7 +25,7 @@ def lint(session: nox.Session):
 
 @nox.session
 def mypy(session: nox.Session) -> None:
-    session.install(".[stream]", "mypy", "pytest")
+    session.install(".[stream,test]", "mypy")
     session.run("mypy")
 
 
